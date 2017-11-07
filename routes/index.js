@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
 });
 router.post('/', function(req, res){
     //res.writeHead(200, {'Content-Type': 'text/html'});
-    res.send("Hi there! " + req.param('username'));
+    res.send("Hi Hola! " + req.param('username'));
 });
 
 module.exports = router;
