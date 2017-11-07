@@ -1,7 +1,7 @@
 <?php
 require_once 'HTTP/Request2.php';
 
-$request = new HTTP_Request2('https://shocking-spell-99426.herokuapp.com/');
+$request = new HTTP_Request2('https://gory-skeleton-77984.herokuapp.com/');
 $request->setMethod(HTTP_Request2::METHOD_POST)
 ->addPostParameter('username', 'Yue Hu'); 
 $request->setConfig(array(
