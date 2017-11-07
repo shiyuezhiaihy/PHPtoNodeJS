@@ -1,9 +1,9 @@
 <?php
 require_once 'HTTP/Request2.php';
 
-$request = new HTTP_Request2('https://gory-skeleton-77984.herokuapp.com/');
+$request = new HTTP_Request2('https://supergalaxy.herokuapp.com/');
 $request->setMethod(HTTP_Request2::METHOD_POST)
-->addPostParameter('username', 'Yue Hu'); 
+->addPostParameter('username', 'Yue Hu');
 $request->setConfig(array(
                'ssl_verify_peer'   => FALSE,
                'ssl_verify_host'   => FALSE
