@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     //res.render('index', { title: 'Express' });
     var MongoClient = require('mongodb').MongoClient;
-    var url = "mongodb://Yue Hu:Love123456@ds153015.mlab.com:53015/heroku_6wmwvjg8";
+    var url = "mongodb://Yue1:Love123456@ds153015.mlab.com:53015/heroku_6wmwvjg8";
 
 
     MongoClient.connect(url, function(err, db) {
@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 });
 router.post('/', function(req, res){
     var MongoClient = require('mongodb').MongoClient;
-    var url = "mongodb://Yue Hu:Love123456@ds153015.mlab.com:53015/heroku_6wmwvjg8";
+    var url = "mongodb://Yue1:Love123456@ds153015.mlab.com:53015/heroku_6wmwvjg8";
 
 
     MongoClient.connect(url, function(err, db) {
