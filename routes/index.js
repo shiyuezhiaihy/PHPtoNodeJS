@@ -3,11 +3,19 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('index', { title: 'Express' });
+    //res.render('index', { title: 'Express' });
+    var MongoClient = require('mongodb').MongoClient;
+    var url = "mongodb://Yue Hu:Love123456@ds153015.mlab.com:53015/heroku_6wmwvjg8";
+
+
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+
+    });
 });
 router.post('/', function(req, res){
     var MongoClient = require('mongodb').MongoClient;
-    var url = "mongodb://Yue Hu:Love123456@ds251245.mlab.com:51245/yuehudb";
+    var url = "mongodb://Yue Hu:Love123456@ds153015.mlab.com:53015/heroku_6wmwvjg8";
 
 
     MongoClient.connect(url, function(err, db) {
