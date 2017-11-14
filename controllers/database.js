@@ -1,4 +1,3 @@
-
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://Yue1:Love123456@ds153015.mlab.com:53015/heroku_6wmwvjg8";
 
