@@ -1,21 +1,18 @@
 var express = require('express');
 var router = express.Router();
-
+var controllerMongoCollection = require('../controllers/database');
 /* GET home page. */
+router.get('/getAllOrders', controllerMongoCollection.getAllOrders);
 router.get('/', function(req, res, next) {
-    //res.render('index', { title: 'Express' });
-    var MongoClient = require('mongodb').MongoClient;
-    var url = "mongodb://Yue1:Love123456@ds153015.mlab.com:53015/heroku_6wmwvjg8";
-
-
-    MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-
-    });
+    res.render('index', { title: 'Express'});
 });
 router.post('/', function(req, res){
     var MongoClient = require('mongodb').MongoClient;
+<<<<<<< HEAD
     var url = "mongodb://Yue1:Love123456@ds153015.mlab.com:53015/heroku_6wmwvjg8";
+=======
+    var url = "mongodb://<username>:<password>@ds251245.mlab.com:53015/heroku_6wmwvjg8";
+>>>>>>> f4b25ee52adbe5e01cc485685c6d5ac176f0dec3
 
 
     MongoClient.connect(url, function(err, db) {
@@ -28,5 +25,6 @@ router.post('/', function(req, res){
         });
     });
 });
+
 
 module.exports = router;
