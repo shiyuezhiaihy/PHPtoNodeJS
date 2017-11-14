@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-var controllerMain = require('../controllers/main');
 var controllerMongoCollection = require('../controllers/database');
 /* GET home page. */
 router.get('/getAllOrders', controllerMongoCollection.getAllOrders);
