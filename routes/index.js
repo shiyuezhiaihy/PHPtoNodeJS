@@ -8,10 +8,12 @@ router.get('/', function(req, res, next) {
 });
 router.post('/', function(req, res){
     var MongoClient = require('mongodb').MongoClient;
-HEAD
+<<<<<<< HEAD
     var url = "mongodb://Yue1:Love123456@ds153015.mlab.com:53015/heroku_6wmwvjg8";
+=======
+    var url = "mongodb://<username>:<password>@ds153015.mlab.com:53015/heroku_6wmwvjg8";
+>>>>>>> f4b25ee52adbe5e01cc485685c6d5ac176f0dec3
 
-    var url = "mongodb://<username>:<password>@ds251245.mlab.com:53015/heroku_6wmwvjg8";
 
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
