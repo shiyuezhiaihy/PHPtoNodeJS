@@ -8,6 +8,7 @@ router.get('/', function(req, res, next) {
 });
 
 
+
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         db.collection("ORDERS").find({name: req.param('username')}).toArray(function (err, docs) {
@@ -17,7 +18,6 @@ router.get('/', function(req, res, next) {
             });
         });
     });
-});
 
 
 module.exports = router;
