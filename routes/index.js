@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
-
 var controllerMongoCollection = require('../controllers/database');
 /* GET home page. */
 router.get('/getAllOrders', controllerMongoCollection.getAllOrders);
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express'});
 });
-
+router.post('/', function(req, res){
+    var MongoClient = require('mongodb').MongoClient;
 
 
     MongoClient.connect(url, function(err, db) {
