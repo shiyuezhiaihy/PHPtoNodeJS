@@ -171,13 +171,14 @@ $request->setMethod(HTTP_Request2::METHOD_POST)
     ->addPostParameter('address1', $_SESSION['address1'])
     ->addPostParameter('address2', $_SESSION['address2'])
     ->addPostParameter('state', $_SESSION['state'])
+    ->addPostParameter('city', $_SESSION['city'])
     ->addPostParameter('zip', $_SESSION['zip'])
 ->addPostParameter('ITEMNUMBER', $_SESSION['$item->code; ?'])
 ->addPostParameter(' ITEMNAME', $_SESSION[' $item->name; ?'])
 ->addPostParameter('SIZE', $_SESSION['$item->size; ?'])
 ->addPostParameter('QUANTITY; ?', $_SESSION['$item->quantity; ?'])
 ->addPostParameter('ITEMPRICE', $_SESSION['$item->price; ?'])
-->addPostParameter('TOTALPRICE', $_SESSION['$item->price*$item->quantity']);
+->addPostParameter('TOTALPRICE', $_SESSION['$t']);
 $request->setConfig(array(
     'ssl_verify_peer'   => FALSE,
     'ssl_verify_host'   => FALSE
@@ -188,10 +189,10 @@ try {
     if (200 == $response->getStatus()) {
         echo $response->getBody();
     } else {
-        echo 'not success';
+        echo 'Your Order Not Success!';
     }
 } catch (HTTP_Request2_Exception $e) {
-    echo 'not success';
+    echo 'Your Order Not Success!';
     echo 'Error: ' . $e->getMessage();
 
 }
