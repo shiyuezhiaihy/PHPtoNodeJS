@@ -3,24 +3,7 @@ var mongoDBURI = process.env.MONGODB_URI ||
     'mongodb://Yue1:Love123456@ds153015.mlab.com:53015/heroku_6wmwvjg8';
 var bodyParser = require('body-parser');
 
-// var x={
-//     "bi_address1":"27752 hummingbird ct.",
-//     "bi_address2":"",
-//     "bi_city":"hayward",
-//     "bi_state":"CA",
-//     "bi_zip":"94545",
-//     "name_card":"ert",
-//     "card_number":"1234123412341234",
-//     "cvs":"324",
-//     "last_name":"hu",
-//     "first_name":"yue",
-//     "date":"2017-11",
-//     "email":"xzx1231@gmail.com",
-//     "phone":"5104155842",
-//     "state":"CA",
-//     "address1":"27752 hummingbird ct.",
-//     "address2":"","zip":"94545"
-// }
+
 module.exports.storeData = function (req, res) {
 
 
@@ -29,25 +12,27 @@ module.exports.storeData = function (req, res) {
     console.log(body)
     console.log(params)
 
-    // user info
-    var theid = req.body.theid;
+    // customers info
     var first = req.body.first_name;
     var last = req.body.last_name;
-    var email = req.body.email;
     var phone = req.body.phone;
+    var email = req.body.email;
     var address = req.body.bi_address1;
     var city = req.body.bi_city;
     var state = req.body.bi_state;
     var zip = req.body.bi_zip;
     // billing info
-    var name_card = req.body.name_card;
+    var card_type = req.body.card_type;
     var card_num = req.body.card_number;
     var exp_date = req.body.date;
+    var cvs = req.body.cvs;
     // shipping info
-    var ship_address = req.body.address;
+    var ship_address = req.body.address1;
     var ship_city = req.body.city;
     var ship_state = req.body.state;
     var ship_zip = req.body.zip;
+    //order info
+    var total = req.body.TOTALPRICE;
     // var provector = req.body.provector;
     // var splitData = provector.split('|');
 
@@ -55,24 +40,24 @@ module.exports.storeData = function (req, res) {
     mongodb.MongoClient.connect(mongoDBURI, function(err, db) {
         if(err) throw err;
 
-        // Create IDs for all the collections.
+
         var customerID = Math.floor((Math.random() * 100000000000) + 1);
         var billingID = Math.floor((Math.random() * 10000000000) + 1);
         var shippingID = Math.floor((Math.random() * 1000000000) + 1);
         var orderID = Math.floor((Math.random() * 100000000) + 1);
-        // Get collection of customers, billing, shipping, orders.
+
         var customers = db.collection('CUSTOMERS');
         var billing = db.collection('BILLING');
         var shipping = db.collection('SHIPPING');
         var orders = db.collection('ORDERS');
 
-        // Create a document to insert into CUSTOMERS.
+
         var customerData = {_id : customerID, FIRSTNAME : first, LASTNAME : last,
             STREET : address, CITY : city, STATE : state, ZIP : zip, EMAIL: email, PHONE:phone};
 
-        // Create a document to insert into BILLING.
-        var billingData = {_id : billingID, CUSTOMER_ID : customerID, CREDITCARDTYPE : name_card,
-            CREDITCARDNUM : card_num, CREDITCARDEXP : exp_date};
+
+        var billingData = {_id : billingID, CUSTOMER_ID : customerID,
+            CREDITCARDNUM : card_num, CREDITCARDEXP : exp_date, CREDITCARDSECURITYNUM : cvs};
 
         // Create a document to insert into SHIPPING.
         var shippingData = {_id : shippingID, CUSTOMER_ID : customerID, SHIPPING_STREET : ship_address,
@@ -81,17 +66,14 @@ module.exports.storeData = function (req, res) {
         // Create a document to insert into ORDERS.
         try {
             var orderData = {_id: orderID,CUSTOMER_ID : customerID, BILLING_ID : billingID, SHIPPING_ID : shippingID,
-                ORDER_TOTAL: 123, DATE : new Date().toDateString()};
+                ORDER_TOTAL: total, DATE : new Date().toDateString()};
         } catch (err) {
             response.render('storeData', { status1: 'Order NOT Successful'});
             throw err;
         }
 
 
-        // Insert document into SHIPPING
-        // // Insert document into BILLING.
-        // // Insert document into CUSTOMERS.
-        // // Insert document into ORDERS.
+
         customers.insertOne(customerData, function (err, result){ if(err)
         {response.render('storeData', { status1: 'Order NOT Successful'});
             throw err; }});
@@ -108,15 +90,10 @@ module.exports.storeData = function (req, res) {
         //get data
 
 
-        //    response.render('storeData', {results: docs});
-
-        res.render('storeData', {customer: customerData, order: orderData,
-            billing: billingData, shipping: shippingData, title: "store data" });
         // Close connection.
+        res.render('storeData', {customer: customerData, order: orderData,
+            billing: billingData, shipping: shippingData, status1: 'Your Current Order was Successful Placed!!!'});
 
-        // db.close(function  (err) {
-        //     if(err) throw err;
-        // });
         db.close(function (err){ if(err) throw err; });
     });
 };
